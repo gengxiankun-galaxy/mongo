@@ -14,7 +14,7 @@ Role Variables
 variable | description
 ------------ | -------------
 OPT_PATH | 部署目录
-SRV_PATH | 服务运行时持久化目录
+MONGO_CONTAINER_NAME | mongo 容器名称
 MONGO_PORT | mongo 服务对外监听端口
 MONGO_EXPRESS_PORT | mongo express 服务对外端口
 MONGO_INITDB_ROOT_USERNAME | mongo 用户名

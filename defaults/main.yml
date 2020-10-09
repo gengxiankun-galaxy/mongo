@@ -2,8 +2,8 @@
 # defaults file for mongo
 
 OPT_PATH: # docker-compose.yaml 文件部署目录
-SRV_PATH: # mongo 容器运行时持久化目录
 
+MONGO_CONTAINER_NAME: mongo
 MONGO_PORT: 27017 # mongo 服务对外监听端口
 MONGO_EXPRESS_PORT: 28081 # mongo express 服务对外端口
 MONGO_INITDB_ROOT_USERNAME: root # mongo 用户名

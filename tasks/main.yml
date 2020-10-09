@@ -2,19 +2,18 @@
 # tasks file for mongo
 
 - name: 清除旧数据及旧容器
-  shell: 'docker-compose -f {{ OPT_PATH }}/mongo/docker-compose.yaml rm -fsva;rm -rf {{ OPT_PATH }}/mongo'
+  shell: 'docker-compose -f {{ OPT_PATH }}/{{ MONGO_CONTAINER_NAME }}/docker-compose.yaml rm -fsva;rm -rf {{ OPT_PATH }}/{{ MONGO_CONTAINER_NAME }}'
   ignore_errors: yes
 
 - name: 创建部署目录
-  shell: '[[ ! -d "{{ OPT_PATH }}/mongo" ]] && mkdir -vp {{ OPT_PATH }}/mongo'
+  shell: '[[ ! -d "{{ OPT_PATH }}/{{ MONGO_CONTAINER_NAME }}" ]] && mkdir -vp {{ OPT_PATH }}/{{ MONGO_CONTAINER_NAME }}'
   ignore_errors: yes
 
-- name: 创建持久化目录
-  shell: '[[ ! -d "{{ SRV_PATH }}/mongo" ]] && mkdir -vp {{ SRV_PATH }}/mongo; chmod 777 {{ SRV_PATH }}/mongo'
-  ignore_errors: yes
+- name: 配置环境变量
+  copy: src=files/mongo.env dest={{ OPT_PATH }}/{{ MONGO_CONTAINER_NAME }}/.env
 
 - name: 配置 mongo docker-compose.yaml
-  template: src=docker-compose.yaml.j2 dest={{ OPT_PATH }}/mongo/docker-compose.yaml
+  template: src=docker-compose.yaml.j2 dest={{ OPT_PATH }}/{{ MONGO_CONTAINER_NAME }}/docker-compose.yaml
 
 - name: 运行服务
-  shell: 'docker-compose -f {{ OPT_PATH }}/mongo/docker-compose.yaml up -d'
+  shell: 'docker-compose -f {{ OPT_PATH }}/{{ MONGO_CONTAINER_NAME }}/docker-compose.yaml up -d'
